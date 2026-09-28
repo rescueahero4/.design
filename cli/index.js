@@ -10,6 +10,7 @@
  * Writes:
  *   .design-recall/bin/                             dm.js + viewer/extract/spec modules
  *   .design-recall/docs/*.md                        conventions, DDR + findings schemas, critique checklists
+ *   .design-recall/README.md                        how to run the viewer, dm commands, getting principles in
  *   .design-recall/mockups/                         your HTML/CSS/JS mockups (single source of truth)
  *   .design-recall/{config.json,state.json,decisions/,snapshots/,context/,.git/}   via dm init
  *   .claude/skills/design-{iterate,critique,spec,viewer,principles}/SKILL.md
@@ -81,6 +82,7 @@ function installFiles() {
   for (const f of fs.readdirSync(path.join(PKG, "templates", "docs"))) copyFile(path.join(PKG, "templates", "docs", f), path.join(D, "docs", f));
   for (const s of SKILLS) copyFile(path.join(PKG, "templates", "skills", s, "SKILL.md"), path.join(ROOT, ".claude", "skills", s, "SKILL.md"));
   for (const a of AGENTS) copyFile(path.join(PKG, "templates", "agents", a + ".md"), path.join(ROOT, ".claude", "agents", a + ".md"));
+  copyFile(path.join(PKG, "templates", "README.md"), path.join(D, "README.md"));
   fs.writeFileSync(path.join(D, "VERSION"), VERSION + "\n");
 }
 // a built viewer embeds the old template; rebuild it so an upgrade shows up without waiting for the next iterate
@@ -146,7 +148,7 @@ function cmdUpdate() {
 }
 
 function cmdUninstall() {
-  for (const p of ["bin", "docs", "VERSION", "viewer", "model.json"]) fs.rmSync(path.join(D, p), { recursive: true, force: true });
+  for (const p of ["bin", "docs", "README.md", "VERSION", "viewer", "model.json"]) fs.rmSync(path.join(D, p), { recursive: true, force: true });
   for (const s of SKILLS) fs.rmSync(path.join(ROOT, ".claude", "skills", s), { recursive: true, force: true });
   for (const a of AGENTS) fs.rmSync(path.join(ROOT, ".claude", "agents", a + ".md"), { force: true });
   removeBlock("CLAUDE.md"); removeBlock("AGENTS.md");

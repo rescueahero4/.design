@@ -5,6 +5,8 @@
 - viewer: iterations as a VS Code-style commit graph, newest first, one line each; expanding shows timestamp, rationale, rejected options, tags, id; filters dim rows instead of hiding them
 - viewer: show/hide buttons for both side panels (`[` / `]`), drag the edges to resize (double-click resets, drag below 100px hides); layout remembered per browser
 - `update` and `init` rebuild an existing viewer so upgrades show up immediately
+- installs `.design-recall/README.md`: running the viewer, dm command reference, how principles get into the viewer
+- `principles --mark` rebuilds the viewer so newly written principles appear right away
 - fix: viewer build failed on Windows when Git's GNU tar was first on PATH (`tar -C C:\...`)
 
 ## 0.3.1 — viewer
