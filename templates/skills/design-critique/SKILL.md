@@ -14,7 +14,9 @@ applied — the designer decides what to change.
 1. `node .design/bin/dm.js status` — note exploration + iteration. Findings attach to it.
 2. `node .design/bin/dm.js extract` — writes `.design/model.json`: pages, flows, components,
    states, forms, nav graph, implied data model, and `checks` (mechanical findings). Read it.
-   Read `.design/context/tech-constraints.md` if it has content.
+   Read `.design/context/tech-constraints.md` if it has content, and
+   `.design/context/design-principles.md` if it exists — findings should be framed in the
+   designer's own principles where one applies ("conflicts with P2", not "modals add friction").
 3. Ask which lenses, unless the user said. Default: all three. In Claude Code, dispatch the
    subagents in `.claude/agents/` in parallel (`edge-case-hunter`, `unhappy-path-walker`,
    `feasibility-reviewer`), giving each the model.json path, the mockup files, and the

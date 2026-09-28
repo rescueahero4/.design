@@ -19,5 +19,9 @@ pagination, availability windows, currency, timezones).
 Rules: evidence only; questions, not architecture proposals; ≤12 findings, severity-ordered;
 `high` only when the feature as drawn cannot be built under the stated constraints.
 
+If `.design/context/design-principles.md` exists, read it: when a finding conflicts with or is
+explained by a principle, say so in `finding` ("conflicts with P2"). Don't raise findings that a
+principle explicitly accepts as a trade-off.
+
 Output **only** a json array per `.design/docs/findings-schema.md`, with
 `"agent": "feasibility-agent"`.

@@ -1,6 +1,6 @@
 {
   "name": "dot-design",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Design-driven process tooling for Claude Code / Cowork: versioned HTML mockups + Design Decision Records in a self-contained .design/ folder.",
   "bin": { "dot-design": "cli/index.js", "dm": "cli/index.js" },
   "files": ["cli", "lib", "templates", "README.md"],

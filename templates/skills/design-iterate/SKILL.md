@@ -35,7 +35,9 @@ dm iterate --exploration <name> --type new-exploration --change "Imported existi
 ## Every design request: the loop
 
 1. **Orient** — `dm status`. Note current exploration, cursor, and whether the working copy is
-   dirty. If dirty and you didn't cause it, the designer edited by hand: commit it first as its
+   dirty. If `.design/context/design-principles.md` exists and you haven't read it this
+   session, read it now: it is the designer's own stated preferences and outranks generic
+   best practice. If dirty and you didn't cause it, the designer edited by hand: commit it first as its
    own iteration (`--change "Manual edits by designer" --trigger designer --confidence inferred`)
    so your change is not mixed with theirs.
 
@@ -49,11 +51,18 @@ dm iterate --exploration <name> --type new-exploration --change "Imported existi
    - question — "why did we…", "what did we try for…" → answer from `dm ddr list` /
      `dm show`; do not edit files.
 
-3. **Make the change** in the mockup files. Follow `.design/docs/conventions.md`
+3. **Check against principles** — if the requested change goes against a principle in
+   `design-principles.md` (e.g. they ask for a modal and P2 says inline), make the change
+   anyway, but say so in one line in your reply, citing the principle and its evidence, and
+   ask whether it's an exception or a change of mind. Record the answer: an exception →
+   note it in the DDR rationale ("exception to P2: …"); a change of mind → same, plus
+   suggest running design-principles. Don't block, don't lecture, don't ask twice.
+
+4. **Make the change** in the mockup files. Follow `.design/docs/conventions.md`
    (`data-component`, `data-state`, `data-flow`, mock data only in `mock-data.js`). Never
    create `index-v2.html` or `index-old.html` copies — versioning is the script's job.
 
-4. **Infer the DDR** before committing. Fill in as much as the evidence supports:
+5. **Infer the DDR** before committing. Fill in as much as the evidence supports:
    - `change`: one line, past tense, concrete ("Moved primary CTA above order summary").
    - `scope.page` / `scope.components`: from the `data-component` attributes you touched.
    - `rationale`: **only what the user actually said or clearly implied.** "people keep missing
@@ -70,7 +79,7 @@ dm iterate --exploration <name> --type new-exploration --change "Imported existi
    Do not invent rationale. An honest `inferred` with a null rationale is worth more than a
    plausible fabrication — the PRD generator will only treat `confirmed` DDRs as decisions.
 
-5. **Commit** — for simple cases pass flags; for anything with rejected options or several
+6. **Commit** — for simple cases pass flags; for anything with rejected options or several
    components, write the DDR to a temp json and use `--ddr-file` (schema in
    `.design/docs/ddr-schema.md`):
 
@@ -83,7 +92,7 @@ dm iterate --exploration <name> --type new-exploration --change "Imported existi
    Omit `--exploration` to continue the current one. `dm` picks the iteration number and
    parent (= wherever the cursor is, so iterating after `back` forks the lineage automatically).
 
-6. **Report and confirm** — end your reply with:
+7. **Report and confirm** — end your reply with:
    - what changed and the new version tag (`checkout-flow/v04`).
    - if `confidence` is `inferred`: **one** short question to capture the missing why, phrased
      as a choice where possible ("Was moving the CTA about hierarchy, or about the mobile
@@ -92,6 +101,8 @@ dm iterate --exploration <name> --type new-exploration --change "Imported existi
      ask again. If they ignore it, leave it `inferred` and move on — `dm ddr list --pending`
      shows the backlog and you can offer to clear it later.
    - if `confirmed`: no question. Just the summary.
+   - if `dm status` shows `principles.confirmed_since_last_run` ≥ 10: add one line offering
+     to run design-principles. Once per session.
 
 Keep this reporting to 2–4 lines. The designer is in flow; the DDR is the byproduct, not the
 product.

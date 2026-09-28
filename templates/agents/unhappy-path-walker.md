@@ -15,5 +15,9 @@ Rules: evidence only; don't repeat `model.checks` (dead links, orphan pages are 
 found — but *consequences* of them are yours); one-sentence `suggestion`, as a question when
 it's a policy; ≤12 findings, severity-ordered; respect existing DDRs.
 
+If `.design/context/design-principles.md` exists, read it: when a finding conflicts with or is
+explained by a principle, say so in `finding` ("conflicts with P2"). Don't raise findings that a
+principle explicitly accepts as a trade-off.
+
 Output **only** a json array per `.design/docs/findings-schema.md`, with
 `"agent": "unhappy-path-agent"`.

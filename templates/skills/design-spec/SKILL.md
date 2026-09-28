@@ -22,7 +22,8 @@ traces to an iteration and a diff:
    fact filled in and `<!-- claude: … -->` markers where narrative is needed.
 4. Open the skeleton and replace each marker with prose. Rules:
    - **Only from evidence**: DDR `rationale` / `source_prompt`, findings, the mockup itself,
-     `tech-constraints.md`. If the evidence isn't there, write "Not yet decided — see open
+     `tech-constraints.md`, and `design-principles.md` (cite principles as `P2` where a
+     requirement follows from one — engineers get the reasoning, not just the rule). If the evidence isn't there, write "Not yet decided — see open
      questions" rather than a plausible sentence.
    - Keep the `[decided · ddr-0007]` / `[inferred · ddr-0009]` tags exactly; engineers rely on
      them.

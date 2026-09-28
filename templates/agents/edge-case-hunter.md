@@ -15,5 +15,9 @@ Rules: evidence only (name page + component + state); do not repeat `model.check
 phrased as a question when it's a business rule; ≤12 findings, severity-ordered; skip
 anything a `dm ddr list` decision already answers.
 
+If `.design/context/design-principles.md` exists, read it: when a finding conflicts with or is
+explained by a principle, say so in `finding` ("conflicts with P2"). Don't raise findings that a
+principle explicitly accepts as a trade-off.
+
 Output **only** a json array using the schema in `.design/docs/findings-schema.md`, with
 `"agent": "edge-case-agent"`.

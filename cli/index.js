@@ -12,7 +12,7 @@
  *   .design/docs/*.md                        conventions, DDR + findings schemas, critique checklists
  *   .design/mockups/                         your HTML/CSS/JS mockups (single source of truth)
  *   .design/{config.json,state.json,decisions/,snapshots/,context/,.git/}   via dm init
- *   .claude/skills/design-{iterate,critique,spec,viewer}/SKILL.md
+ *   .claude/skills/design-{iterate,critique,spec,viewer,principles}/SKILL.md
  *   .claude/agents/{edge-case-hunter,unhappy-path-walker,feasibility-reviewer}.md
  *   CLAUDE.md / AGENTS.md                    a marked block pointing at the skill (appended)
  */
@@ -39,6 +39,10 @@ Skills in \`.claude/skills/\` (read the matching SKILL.md before acting):
 - **design-critique** — edge cases, unhappy paths, feasibility → findings (uses agents in \`.claude/agents/\`).
 - **design-spec** — PRD and solution-architecture docs derived from mockups + DDRs + findings.
 - **design-viewer** — build the local HTML viewer of iterations and decisions.
+- **design-principles** — distil confirmed DDRs into \`.design/context/design-principles.md\`; check drift.
+
+**Read \`.design/context/design-principles.md\` at the start of any design work** if it exists. It is
+the designer's own stated preferences, with evidence, and outranks generic best practice.
 
 Never run plain \`git\` against \`.design/\`; use \`dm\` commands only.
 Docs: \`.design/docs/\` (conventions, ddr-schema, findings-schema, critique-checklists).
@@ -47,7 +51,7 @@ ${MARK_END}`;
 function copyFile(src, dst) { fs.mkdirSync(path.dirname(dst), { recursive: true }); fs.copyFileSync(src, dst); }
 function log(s) { process.stdout.write("dot-design: " + s + "\n"); }
 
-const SKILLS = ["design-iterate", "design-critique", "design-spec", "design-viewer"];
+const SKILLS = ["design-iterate", "design-critique", "design-spec", "design-viewer", "design-principles"];
 const AGENTS = ["edge-case-hunter", "unhappy-path-walker", "feasibility-reviewer"];
 function installFiles() {
   for (const f of fs.readdirSync(path.join(PKG, "lib"))) copyFile(path.join(PKG, "lib", f), path.join(D, "bin", f));

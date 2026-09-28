@@ -34,6 +34,7 @@ my-project/
     mockups/             ← your HTML/CSS/JS. Single source of truth. Versioned by dm.
     decisions/           ← ddr-0001.json … one per iteration
     context/tech-constraints.md   ← fill in with engineering
+    context/design-principles.md  ← your distilled principles (Claude writes, you edit)
     docs/                ← DDR schema, mockup conventions
     bin/dm.js            ← the CLI
     config.json  state.json  snapshots/  .git/ (shadow repo)
@@ -41,7 +42,7 @@ my-project/
     specs/               ← PRD.md, SOLUTION-ARCHITECTURE.md (derived, regenerable)
     viewer/index.html    ← run `dm viewer`, then open it (regenerated)
     model.json           ← run `dm extract` (regenerated)
-  .claude/skills/design-{iterate,critique,spec,viewer}/SKILL.md
+  .claude/skills/design-{iterate,critique,spec,viewer,principles}/SKILL.md
   .claude/agents/{edge-case-hunter,unhappy-path-walker,feasibility-reviewer}.md
   CLAUDE.md              ← marked block appended
 ```
@@ -58,6 +59,8 @@ npx dot-design viewer                        # then open .design/viewer/index.ht
 npx dot-design extract                       # DOM + mock-data → model.json + mechanical checks
 npx dot-design findings list --open
 npx dot-design spec prd | arch               # skeletons; Claude fills the narrative
+npx dot-design principles                    # evidence digest → Claude writes design-principles.md
+npx dot-design principles --check            # drift: rejected-then-reintroduced, unclassified evidence
 ```
 
 ## Workflow
@@ -69,7 +72,11 @@ npx dot-design spec prd | arch               # skeletons; Claude fills the narra
 3. **Act** — "fix f-0004" → a normal iteration, triggered by the agent, resolving the finding.
 4. **Spec** — "give me the PRD" / "solution architecture". Generated from mockups + DDRs +
    findings; every requirement tagged *decided* or *inferred* with its DDR id.
-5. **Review** — `dm viewer`: iteration tree, side-by-side compare, decisions, findings.
+5. **Review** — `dm viewer`: iteration tree, side-by-side compare, decisions, findings, principles.
+6. **Distil** — after ~10 confirmed decisions, "what have you learned about how I design?" →
+   `.design/context/design-principles.md`: your principles, each backed by DDR ids, loaded in
+   every session via CLAUDE.md. Skills check new requests against it and ask when you
+   contradict yourself. `dm principles --check` finds drift mechanically.
 
 (`npx dm …` also works.) Normally you don't type these — Claude does, following the skill.
 
@@ -80,6 +87,7 @@ npx dot-design spec prd | arch               # skeletons; Claude fills the narra
 - ✅ DOM extraction + mechanical checks
 - ✅ critique skill + three agents
 - ✅ PRD / solution-architecture generators
+- ✅ principles distillation + drift check (tacit-knowledge layer)
 
-Ideas: screenshot diffing per iteration; export viewer as shareable zip; Figma import as a
-`new-exploration`; DDR summariser ("what does this designer care about").
+Ideas: cross-project principles (a portable `~/.design/` profile); screenshot diffing per
+iteration; export viewer as shareable zip; Figma import as a `new-exploration`.
