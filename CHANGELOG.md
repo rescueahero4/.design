@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.1 — viewer
+- viewer: flat iteration list (no per-depth indent); forks show "↳ from vNN"
+- viewer: cards clamp to two lines; ▸ expands to rationale, rejected options, tags, id; expand/collapse all
+- viewer: serif chrome with sans labels and mono ids, so the tool never reads as part of the mockup
+- viewer rebuilt automatically after iterate / revert / fork / ddr confirm / findings once it exists
+- `dm viewer --watch` rebuilds on any change to decisions, context, findings or mockups
+- viewer: ↻ button / R key to reload; over http it checks for a newer build only when the tab regains focus (no polling); remembers selected exploration/version per tab
+
 ## 0.3.0 — tacit-knowledge layer
 - **Renamed package to `design-recall`** (`dot-design` on npm belongs to someone else). Bin `dm` unchanged; old CLAUDE.md markers still recognised by `update`/`uninstall`
 - **Project folder is now `.design-recall/`** (was `.design/`). `update`, `init` and any `dm` command migrate an existing `.design/` in place

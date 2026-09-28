@@ -40,7 +40,7 @@ my-project/
     config.json  state.json  snapshots/  .git/ (shadow repo)
     findings.json        ← critique findings (f-0001 …), resolved against DDRs
     specs/               ← PRD.md, SOLUTION-ARCHITECTURE.md (derived, regenerable)
-    viewer/index.html    ← run `dm viewer`, then open it (regenerated)
+    viewer/index.html    ← run `dm viewer` once; kept current after every iteration
     model.json           ← run `dm extract` (regenerated)
   .claude/skills/design-{iterate,critique,spec,viewer,principles}/SKILL.md
   .claude/agents/{edge-case-hunter,unhappy-path-walker,feasibility-reviewer}.md
@@ -55,7 +55,7 @@ npx design-recall iterate --change "Moved CTA above summary" --rationale "…"
 npx design-recall log
 npx design-recall back | forward | goto v3 | revert v3 | fork v2 --as variant-b
 npx design-recall ddr list --pending
-npx design-recall viewer                        # then open .design-recall/viewer/index.html
+npx design-recall viewer [--watch]              # build once; auto-rebuilt after each iteration (--watch: also on manual edits)
 npx design-recall extract                       # DOM + mock-data → model.json + mechanical checks
 npx design-recall findings list --open
 npx design-recall spec prd | arch               # skeletons; Claude fills the narrative
@@ -72,7 +72,8 @@ npx design-recall principles --check            # drift: rejected-then-reintrodu
 3. **Act** — "fix f-0004" → a normal iteration, triggered by the agent, resolving the finding.
 4. **Spec** — "give me the PRD" / "solution architecture". Generated from mockups + DDRs +
    findings; every requirement tagged *decided* or *inferred* with its DDR id.
-5. **Review** — `dm viewer`: iteration tree, side-by-side compare, decisions, findings, principles.
+5. **Review** — `dm viewer`: iteration list, side-by-side compare, decisions, findings, principles.
+   Built once, refreshed automatically; ↻ (or R) reloads the page — no background polling.
 6. **Distil** — after ~10 confirmed decisions, "what have you learned about how I design?" →
    `.design-recall/context/design-principles.md`: your principles, each backed by DDR ids, loaded in
    every session via CLAUDE.md. Skills check new requests against it and ask when you

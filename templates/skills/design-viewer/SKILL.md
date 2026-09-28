@@ -11,9 +11,17 @@ node .design-recall/bin/dm.js viewer
 
 Writes `.design-recall/viewer/index.html` (data inlined; extracts every version to `.design-recall/snapshots/`).
 Then tell the user to open it — on macOS `open .design-recall/viewer/index.html`, or double-click.
-No server, no dependencies. Rebuild after new iterations; it is a snapshot, not live.
+No server, no dependencies.
 
-What they'll see: exploration picker · iteration tree (branches indented) · page tabs · iframe
+**You only need to build it once.** After that `dm` rebuilds it automatically after every
+`iterate`, `revert`, `fork`, `ddr confirm/edit` and findings change. Do not re-run `dm viewer`
+after each iteration. The page never polls: served over http it checks for a newer build only when the
+tab regains focus and then highlights the ↻ button; ↻ (or the R key) reloads. Live Server-style
+tools push the reload themselves anyway. For manual mockup edits outside `dm`, `dm viewer --watch` rebuilds on file change.
+
+What they'll see: exploration picker · flat iteration list (newest at the bottom; a fork shows
+"↳ from vNN" instead of an indent; each card clamps to two lines — the ▸ chevron or "expand all"
+reveals rationale, rejected options, tags and id) · page tabs · iframe
 preview · **Compare** button (pick a second version → two iframes side by side) · right panel
 with the DDR (change, rationale, rejected, tags, designer's original words) and any critique
 findings for that version · "pending only" filter for DDRs still `inferred` · click a tag to
