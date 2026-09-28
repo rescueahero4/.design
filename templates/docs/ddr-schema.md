@@ -1,6 +1,6 @@
 # DDR — Design Decision Record
 
-One json file per iteration in `.design/decisions/ddr-NNNN.json`. Written by `dm iterate`,
+One json file per iteration in `.design-recall/decisions/ddr-NNNN.json`. Written by `dm iterate`,
 amended by `dm ddr confirm` / `dm ddr edit`. Read later by the viewer, the critique agents,
 and the PRD / solution-architecture generators.
 

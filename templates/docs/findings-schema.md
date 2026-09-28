@@ -1,6 +1,6 @@
 # Findings schema
 
-Stored in `.design/findings.json`, appended by `dm findings add --file <json>`.
+Stored in `.design-recall/findings.json`, appended by `dm findings add --file <json>`.
 Agents output a json array of objects with the fields marked *agent*. `dm` fills the rest.
 
 | Field | Who | Meaning |

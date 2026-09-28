@@ -1,6 +1,6 @@
 ---
 name: design-spec
-description: Generate or refresh the PRD and the Solution Architecture document from the mockups, DDRs and critique findings in .design/. Use when the user asks for a "PRD", "spec", "requirements doc", "solution architecture", "tech spec", "hand-off doc", "what should I give engineering", or "document the design". The mockups are the source of truth; the documents are derived, traceable, and regenerable.
+description: Generate or refresh the PRD and the Solution Architecture document from the mockups, DDRs and critique findings in .design-recall/. Use when the user asks for a "PRD", "spec", "requirements doc", "solution architecture", "tech spec", "hand-off doc", "what should I give engineering", or "document the design". The mockups are the source of truth; the documents are derived, traceable, and regenerable.
 ---
 
 # design-spec
@@ -8,17 +8,17 @@ description: Generate or refresh the PRD and the Solution Architecture document 
 Two documents, both regenerated from the same sources, both citing DDR ids so every requirement
 traces to an iteration and a diff:
 
-- `.design/specs/PRD.md` — user-facing: journeys, per-screen requirements, decision log, open questions.
-- `.design/specs/SOLUTION-ARCHITECTURE.md` — eng-facing: routes, nav graph, component inventory, implied data model + API surface, constraints, feasibility flags.
+- `.design-recall/specs/PRD.md` — user-facing: journeys, per-screen requirements, decision log, open questions.
+- `.design-recall/specs/SOLUTION-ARCHITECTURE.md` — eng-facing: routes, nav graph, component inventory, implied data model + API surface, constraints, feasibility flags.
 
 ## Procedure
 
-1. `node .design/bin/dm.js status`. If there are DDRs pending confirmation
+1. `node .design-recall/bin/dm.js status`. If there are DDRs pending confirmation
    (`pending_confirmation` non-empty), tell the user in one line: those will appear as
    *inferred*, not *decided*. Offer to confirm them first (each is one question). Don't block.
 2. If no critique has been run on this iteration (`dm findings list --open` empty and the user
    hasn't declined), say so in one line and offer `design-critique` first. Don't block.
-3. `node .design/bin/dm.js spec prd` and/or `spec arch` — writes skeletons with every mechanical
+3. `node .design-recall/bin/dm.js spec prd` and/or `spec arch` — writes skeletons with every mechanical
    fact filled in and `<!-- claude: … -->` markers where narrative is needed.
 4. Open the skeleton and replace each marker with prose. Rules:
    - **Only from evidence**: DDR `rationale` / `source_prompt`, findings, the mockup itself,
@@ -36,7 +36,7 @@ traces to an iteration and a diff:
      audit trail.
 5. Remove the markers you've filled. Leave any you couldn't fill, with a one-line reason.
 6. Tell the user the file path(s) and the three most consequential open questions. If they
-   want a Word/PDF/Notion version, convert from the markdown — the `.md` in `.design/specs/`
+   want a Word/PDF/Notion version, convert from the markdown — the `.md` in `.design-recall/specs/`
    stays the source.
 
 ## Regenerating

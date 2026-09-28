@@ -1,6 +1,6 @@
 ---
 name: design-principles
-description: Distil the designer's confirmed Design Decision Records into an explicit, evidence-linked set of design principles at .design/context/design-principles.md — the tacit-knowledge layer that every other skill reads. Use when the user asks "what have you learned about how I design", "summarise my decisions", "what are my design principles", "update the principles", "am I being consistent", or when dm status shows 10+ confirmed DDRs since the last run (offer it once, one line). Also use to check drift: "did I contradict myself".
+description: Distil the designer's confirmed Design Decision Records into an explicit, evidence-linked set of design principles at .design-recall/context/design-principles.md — the tacit-knowledge layer that every other skill reads. Use when the user asks "what have you learned about how I design", "summarise my decisions", "what are my design principles", "update the principles", "am I being consistent", or when dm status shows 10+ confirmed DDRs since the last run (offer it once, one line). Also use to check drift: "did I contradict myself".
 ---
 
 # design-principles
@@ -11,12 +11,12 @@ in every session through CLAUDE.md. It is the designer's — they can edit it, a
 
 ## Write / update
 
-1. `node .design/bin/dm.js principles` → an evidence digest: concerns by frequency, everything
+1. `node .design-recall/bin/dm.js principles` → an evidence digest: concerns by frequency, everything
    the designer rejected and why, every confirmed decision with rationale and their own words,
    and the existing principles (if any). Only **confirmed** DDRs count; inferred ones are
    guesses and must not shape principles. If there are fewer than 5 confirmed DDRs, say so
    and stop — offer `dm ddr list --pending` to confirm some first.
-2. Read `.design/docs/principles-schema.md` for the exact format.
+2. Read `.design-recall/docs/principles-schema.md` for the exact format.
 3. Distil. Rules:
    - A principle needs **≥2 supporting DDRs**, or 1 DDR plus an explicit rejection. One
      decision is an event, not a principle.
@@ -35,13 +35,13 @@ in every session through CLAUDE.md. It is the designer's — they can edit it, a
    - Keep the designer's hand edits. If a hand-edited statement now conflicts with evidence,
      leave the statement and add a line `- Note: evidence since <date> leans the other way (ddr-…)`.
    - 5–15 principles. If you have 30, you're listing decisions, not principles.
-4. Write the file. Then `node .design/bin/dm.js principles --mark`.
+4. Write the file. Then `node .design-recall/bin/dm.js principles --mark`.
 5. Show the designer the principles that are **new or changed** only, one line each, and ask
    the single most useful question: which one they'd word differently.
 
 ## Check drift
 
-`node .design/bin/dm.js principles --check` finds, mechanically:
+`node .design-recall/bin/dm.js principles --check` finds, mechanically:
 - `rejected-reintroduced` — a later decision resembles an option an earlier DDR rejected, and doesn't cite it.
 - `unclassified-evidence` — a confirmed DDR carries a principle's tag but isn't listed as evidence or exception.
 - `dangling-evidence` — a principle cites a DDR that's gone or reverted.

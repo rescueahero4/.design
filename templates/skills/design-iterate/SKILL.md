@@ -1,13 +1,13 @@
 ---
 name: design-iterate
-description: Design-memory loop for HTML/CSS/JS mockups. Use this skill EVERY time the user asks to create, change, tweak, iterate on, explore a variant of, go back to, compare, revert, or fork a mockup, prototype, screen, page, or component in this project — even for tiny changes like "make the button bigger". Also use when the user asks why something was designed a certain way, what alternatives were tried, or asks to "record this decision". It versions every change in a shadow git repo (.design/.git) and captures a Design Decision Record (DDR) so design rationale and tacit knowledge are never lost. If the project has no .design/ folder yet, this skill sets it up.
+description: Design-memory loop for HTML/CSS/JS mockups. Use this skill EVERY time the user asks to create, change, tweak, iterate on, explore a variant of, go back to, compare, revert, or fork a mockup, prototype, screen, page, or component in this project — even for tiny changes like "make the button bigger". Also use when the user asks why something was designed a certain way, what alternatives were tried, or asks to "record this decision". It versions every change in a shadow git repo (.design-recall/.git) and captures a Design Decision Record (DDR) so design rationale and tacit knowledge are never lost. If the project has no .design-recall/ folder yet, this skill sets it up.
 ---
 
 # design-iterate
 
-The mockups in `<mockups_dir>` (see `.design/config.json`, default `.design/mockups/`) are the single
+The mockups in `<mockups_dir>` (see `.design-recall/config.json`, default `.design-recall/mockups/`) are the single
 source of truth. Every change you make to them becomes one **iteration**: a commit in the
-shadow repo + a **DDR** (Design Decision Record) json in `.design/decisions/`. Old iterations
+shadow repo + a **DDR** (Design Decision Record) json in `.design-recall/decisions/`. Old iterations
 are never deleted; the designer can move back, forward, revert, or fork at any time.
 
 Your job in this loop: make the design change the user asked for, then capture *why* it
@@ -16,14 +16,14 @@ happened as accurately as you can without slowing the designer down.
 All mechanics go through one script (zero dependencies, needs `node` + `git`):
 
 ```
-node .design/bin/dm.js <command>
+node .design-recall/bin/dm.js <command>
 ```
 
 Run `dm.js help` for the full command list. Below: `dm` means that invocation.
 
 ## First run
 
-If `.design/config.json` does not exist: run `dm init` (add `--mockups <dir>` if the mockups
+If `.design-recall/config.json` does not exist: run `dm init` (add `--mockups <dir>` if the mockups
 live somewhere other than `design/`). Then tell the user, in one line, that design memory is
 on and where it lives. If mockup files already existed, immediately record them as the first
 iteration:
@@ -35,7 +35,7 @@ dm iterate --exploration <name> --type new-exploration --change "Imported existi
 ## Every design request: the loop
 
 1. **Orient** — `dm status`. Note current exploration, cursor, and whether the working copy is
-   dirty. If `.design/context/design-principles.md` exists and you haven't read it this
+   dirty. If `.design-recall/context/design-principles.md` exists and you haven't read it this
    session, read it now: it is the designer's own stated preferences and outranks generic
    best practice. If dirty and you didn't cause it, the designer edited by hand: commit it first as its
    own iteration (`--change "Manual edits by designer" --trigger designer --confidence inferred`)
@@ -58,7 +58,7 @@ dm iterate --exploration <name> --type new-exploration --change "Imported existi
    note it in the DDR rationale ("exception to P2: …"); a change of mind → same, plus
    suggest running design-principles. Don't block, don't lecture, don't ask twice.
 
-4. **Make the change** in the mockup files. Follow `.design/docs/conventions.md`
+4. **Make the change** in the mockup files. Follow `.design-recall/docs/conventions.md`
    (`data-component`, `data-state`, `data-flow`, mock data only in `mock-data.js`). Never
    create `index-v2.html` or `index-old.html` copies — versioning is the script's job.
 
@@ -81,7 +81,7 @@ dm iterate --exploration <name> --type new-exploration --change "Imported existi
 
 6. **Commit** — for simple cases pass flags; for anything with rejected options or several
    components, write the DDR to a temp json and use `--ddr-file` (schema in
-   `.design/docs/ddr-schema.md`):
+   `.design-recall/docs/ddr-schema.md`):
 
    ```
    dm iterate --change "Moved primary CTA above order summary" \
@@ -129,7 +129,7 @@ working copy — commit first with `dm iterate`.
 Explorations are parallel concepts (e.g. `checkout-flow` vs `checkout-minimal`), each with its
 own v01…vN lineage. They share the same working directory, so only one is checked out at a
 time. Switching: `dm goto v<N> --exploration <name>`. When the user asks to compare two
-explorations, `dm snapshot` extracts every iteration to `.design/snapshots/<expl>/vNN/` so both
+explorations, `dm snapshot` extracts every iteration to `.design-recall/snapshots/<expl>/vNN/` so both
 can be opened side by side.
 
 ## Manual edits by the designer
@@ -140,7 +140,7 @@ to see the changes, describe them in the `change` field, and ask the one questio
 
 ## What not to do
 
-- Never delete or rewrite files in `.design/decisions/` by hand; use `dm ddr edit/confirm`.
+- Never delete or rewrite files in `.design-recall/decisions/` by hand; use `dm ddr edit/confirm`.
 - Never run plain `git` in the project — the shadow repo is reached only through `dm`, so the
   engineering repo stays untouched.
 - Never batch several unrelated design changes into one iteration. One intent → one iteration.
@@ -149,5 +149,5 @@ to see the changes, describe them in the `change` field, and ask the one questio
 
 ## References
 
-- `.design/docs/ddr-schema.md` — full DDR field list, allowed values, examples of good vs bad rationale.
-- `.design/docs/conventions.md` — markup conventions the mockups must follow (component/state/flow tags, mock data, file layout) and why they matter for later critique and PRD generation.
+- `.design-recall/docs/ddr-schema.md` — full DDR field list, allowed values, examples of good vs bad rationale.
+- `.design-recall/docs/conventions.md` — markup conventions the mockups must follow (component/state/flow tags, mock data, file layout) and why they matter for later critique and PRD generation.

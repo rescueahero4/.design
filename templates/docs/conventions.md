@@ -8,7 +8,7 @@ of guessing from screenshots.
 ## File layout
 
 ```
-.design/mockups/         # mockups_dir (single source of truth, versioned by dm)
+.design-recall/mockups/         # mockups_dir (single source of truth, versioned by dm)
   index.html             # entry / navigation between pages
   <page>.html            # one file per screen
   styles.css             # shared styles (page-specific CSS may live in <page>.css)
@@ -55,7 +55,7 @@ window.MOCK = {
 
 Field names matter: the solution-architecture generator reads them as the implied data model.
 Keep them honest (snake_case vs camelCase as the eng stack prefers — see
-`.design/context/tech-constraints.md`).
+`.design-recall/context/tech-constraints.md`).
 
 ## JS discipline
 

@@ -1,6 +1,6 @@
 # design-principles.md — format
 
-Lives at `.design/context/design-principles.md`. Written by Claude via the design-principles
+Lives at `.design-recall/context/design-principles.md`. Written by Claude via the design-principles
 skill, edited freely by the designer. Loaded every session via CLAUDE.md. Parsed by
 `dm principles --check` and the viewer, so keep the field lines exact.
 
