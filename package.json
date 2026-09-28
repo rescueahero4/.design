@@ -2,9 +2,33 @@
   "name": "design-recall",
   "version": "0.3.0",
   "description": "Design-driven process tooling for Claude Code / Cowork: versioned HTML mockups + Design Decision Records in a self-contained .design-recall/ folder.",
-  "bin": { "design-recall": "cli/index.js", "dm": "cli/index.js" },
-  "files": ["cli", "lib", "templates", "README.md"],
-  "engines": { "node": ">=18" },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rescueahero4/design-recall.git"
+  },
+  "homepage": "https://github.com/rescueahero4/design-recall#readme",
+  "bugs": {
+    "url": "https://github.com/rescueahero4/design-recall/issues"
+  },
+  "bin": {
+    "design-recall": "cli/index.js",
+    "dm": "cli/index.js"
+  },
+  "files": [
+    "cli",
+    "lib",
+    "templates",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "license": "MIT",
-  "keywords": ["design", "claude", "prototype", "ddr", "mockup"]
+  "keywords": [
+    "design",
+    "claude",
+    "prototype",
+    "ddr",
+    "mockup"
+  ]
 }
