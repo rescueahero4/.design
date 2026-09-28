@@ -8,8 +8,16 @@ Everything lives in one folder, `.design/`, so it never collides with your proje
 
 ## Install
 
+Run this from the root of your project to install straight from GitHub:
+
 ```
 cd my-project
+npx github:rescueahero4/.design init
+```
+
+Or, once it's published to npm:
+
+```
 npx dot-design init
 ```
 
@@ -20,8 +28,8 @@ That's it. It:
 - appends a marked block to `CLAUDE.md` (created if missing) and `AGENTS.md` (only if it exists)
 - adds `.design/.git/`, `.design/snapshots/`, `.design/state.json` to `.gitignore` if you have one
 
-Safe to re-run. `npx dot-design update` refreshes tool files after a new release;
-`npx dot-design uninstall` removes tool files but keeps your history and decisions.
+Safe to re-run. `npx github:rescueahero4/.design update` refreshes tool files after a new release;
+`npx github:rescueahero4/.design uninstall` removes tool files but keeps your history and decisions.
 
 Requires `node` ≥ 18 and `git`. No runtime dependencies.
 
