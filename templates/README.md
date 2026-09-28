@@ -96,3 +96,9 @@ npx design-recall principles --check
 | `bin/` | `dm.js` and modules (installed) | optional |
 | `.git/` | Shadow history of the mockups; never touches your project's git | no |
 | `snapshots/`, `viewer/`, `state.json`, `model.json` | Generated | no |
+
+`snapshots/` holds a browsable copy of every version for the viewer. Files that are identical
+across versions are stored once (`snapshots/.blobs/`) and hard-linked into each version folder, so
+it grows only with real changes. Windows Explorer's folder "Size" counts every link in full and
+overstates it; "Size on disk" of `.blobs/` is the real figure. Don't edit files in `snapshots/`: a
+change would show up in every version that shares the file.

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+- snapshots: identical files across versions stored once (`snapshots/.blobs/`) and hard-linked into each version (copy fallback); sample project 17 MB → 2 MB
+- snapshots: incremental — only new or changed versions are extracted; removed versions and unused blobs are cleaned up (a viewer rebuild with nothing new takes ~0.1 s)
+- snapshots read blobs straight from the shadow git (no `tar` dependency)
+
 ## 0.3.2 — viewer redesign
 - viewer redesign: dark, high-contrast, square corners, one accessible blue; Inter + JetBrains Mono; shaded sections; hidden scrollbars
 - viewer: iterations as a VS Code-style commit graph, newest first, one line each; expanding shows timestamp, rationale, rejected options, tags, id; filters dim rows instead of hiding them

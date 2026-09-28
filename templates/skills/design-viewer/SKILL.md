@@ -32,4 +32,9 @@ blocking `file://` iframes — run `python3 -m http.server -d .design-recall 800
 `http://localhost:8000/viewer/`.
 
 Sharing: the viewer needs `.design-recall/snapshots/` next to it. Zip `.design-recall/viewer` +
-`.design-recall/snapshots` together.
+`.design-recall/snapshots` together (the hidden `snapshots/.blobs/` store can be left out; zip tools
+store each hard-linked file as a normal copy, so the zip is larger than the folder on disk).
+
+Snapshot files are hard links into a shared store: identical files across versions are stored once.
+Never edit a file under `snapshots/` — it would change every version sharing it. Edit the mockups
+and iterate instead.
