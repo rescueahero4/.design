@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+- viewer redesign: dark, high-contrast, square corners, one accessible blue; Inter + JetBrains Mono; shaded sections; hidden scrollbars
+- viewer: iterations as a VS Code-style commit graph, newest first, one line each; expanding shows timestamp, rationale, rejected options, tags, id; filters dim rows instead of hiding them
+- viewer: show/hide buttons for both side panels (`[` / `]`), drag the edges to resize (double-click resets, drag below 100px hides); layout remembered per browser
+- `update` and `init` rebuild an existing viewer so upgrades show up immediately
+- fix: viewer build failed on Windows when Git's GNU tar was first on PATH (`tar -C C:\...`)
+
 ## 0.3.1 — viewer
 - viewer: flat iteration list (no per-depth indent); forks show "↳ from vNN"
 - viewer: cards clamp to two lines; ▸ expands to rationale, rejected options, tags, id; expand/collapse all

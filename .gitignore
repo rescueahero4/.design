@@ -1,3 +1,6 @@
 node_modules/
 *.tgz
 .DS_Store
+
+# local viewer preview with sample data (testing only)
+preview/

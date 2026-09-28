@@ -83,6 +83,12 @@ function installFiles() {
   for (const a of AGENTS) copyFile(path.join(PKG, "templates", "agents", a + ".md"), path.join(ROOT, ".claude", "agents", a + ".md"));
   fs.writeFileSync(path.join(D, "VERSION"), VERSION + "\n");
 }
+// a built viewer embeds the old template; rebuild it so an upgrade shows up without waiting for the next iterate
+function refreshViewer() {
+  if (!fs.existsSync(path.join(D, "viewer", "index.html"))) return false;
+  try { execFileSync(process.execPath, [path.join(D, "bin", "dm.js"), "viewer"], { stdio: ["ignore", "ignore", "inherit"], cwd: ROOT }); return true; }
+  catch { log("viewer rebuild failed; run: npx design-recall viewer"); return false; }
+}
 
 function upsertBlock(file, { createIfMissing }) {
   const p = path.join(ROOT, file);
@@ -112,7 +118,7 @@ function cmdInit(args) {
   if (fresh) {
     const mockups = args.includes("--mockups") ? args[args.indexOf("--mockups") + 1] : ".design-recall/mockups";
     dm(["init", "--mockups", mockups]);
-  } else log(".design-recall/ already initialised — refreshed tool files only");
+  } else log(".design-recall/ already initialised — refreshed tool files only" + (refreshViewer() ? " (viewer rebuilt)" : ""));
   const wroteClaude = upsertBlock("CLAUDE.md", { createIfMissing: true });
   const wroteAgents = upsertBlock("AGENTS.md", { createIfMissing: false });
   // keep eng repo tidy: ignore shadow-git internals if project has a .gitignore
@@ -135,7 +141,8 @@ function cmdUpdate() {
   installFiles();
   upsertBlock("CLAUDE.md", { createIfMissing: false });
   upsertBlock("AGENTS.md", { createIfMissing: false });
-  log(`updated to v${VERSION} (decisions, history and mockups untouched)`);
+  const rebuilt = refreshViewer();
+  log(`updated to v${VERSION} (decisions, history and mockups untouched${rebuilt ? "; viewer rebuilt" : ""})`);
 }
 
 function cmdUninstall() {
