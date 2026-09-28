@@ -8,11 +8,12 @@
  *   npx dot-design <dm cmd>    passthrough to .design/bin/dm.js
  *
  * Writes:
- *   .design/bin/dm.js                        the CLI
- *   .design/docs/*.md                        DDR schema, conventions
+ *   .design/bin/                             dm.js + viewer/extract/spec modules
+ *   .design/docs/*.md                        conventions, DDR + findings schemas, critique checklists
  *   .design/mockups/                         your HTML/CSS/JS mockups (single source of truth)
  *   .design/{config.json,state.json,decisions/,snapshots/,context/,.git/}   via dm init
- *   .claude/skills/design-iterate/SKILL.md   the skill Claude Code / Cowork picks up
+ *   .claude/skills/design-{iterate,critique,spec,viewer}/SKILL.md
+ *   .claude/agents/{edge-case-hunter,unhappy-path-walker,feasibility-reviewer}.md
  *   CLAUDE.md / AGENTS.md                    a marked block pointing at the skill (appended)
  */
 const fs = require("fs");
@@ -33,20 +34,26 @@ This project uses **dot-design** (v${VERSION}). Mockups live in \`.design/mockup
 single source of truth for UX, the PRD and the solution architecture. Every change to them is an
 iteration recorded by \`node .design/bin/dm.js\` with a Design Decision Record (DDR).
 
-- For ANY request to create, change, compare, revert or fork a mockup, follow the skill at
-  \`.claude/skills/design-iterate/SKILL.md\`. Do not edit mockups without it.
-- Never run plain \`git\` against \`.design/\`; use \`dm\` commands only.
-- Conventions: \`.design/docs/conventions.md\`. DDR fields: \`.design/docs/ddr-schema.md\`.
+Skills in \`.claude/skills/\` (read the matching SKILL.md before acting):
+- **design-iterate** — ANY create/change/compare/revert/fork of a mockup. Never edit mockups without it.
+- **design-critique** — edge cases, unhappy paths, feasibility → findings (uses agents in \`.claude/agents/\`).
+- **design-spec** — PRD and solution-architecture docs derived from mockups + DDRs + findings.
+- **design-viewer** — build the local HTML viewer of iterations and decisions.
+
+Never run plain \`git\` against \`.design/\`; use \`dm\` commands only.
+Docs: \`.design/docs/\` (conventions, ddr-schema, findings-schema, critique-checklists).
 ${MARK_END}`;
 
 function copyFile(src, dst) { fs.mkdirSync(path.dirname(dst), { recursive: true }); fs.copyFileSync(src, dst); }
 function log(s) { process.stdout.write("dot-design: " + s + "\n"); }
 
+const SKILLS = ["design-iterate", "design-critique", "design-spec", "design-viewer"];
+const AGENTS = ["edge-case-hunter", "unhappy-path-walker", "feasibility-reviewer"];
 function installFiles() {
-  copyFile(path.join(PKG, "lib", "dm.js"), path.join(D, "bin", "dm.js"));
-  for (const f of fs.readdirSync(path.join(PKG, "templates", "skill", "references")))
-    copyFile(path.join(PKG, "templates", "skill", "references", f), path.join(D, "docs", f));
-  copyFile(path.join(PKG, "templates", "skill", "SKILL.md"), path.join(ROOT, ".claude", "skills", "design-iterate", "SKILL.md"));
+  for (const f of fs.readdirSync(path.join(PKG, "lib"))) copyFile(path.join(PKG, "lib", f), path.join(D, "bin", f));
+  for (const f of fs.readdirSync(path.join(PKG, "templates", "docs"))) copyFile(path.join(PKG, "templates", "docs", f), path.join(D, "docs", f));
+  for (const s of SKILLS) copyFile(path.join(PKG, "templates", "skills", s, "SKILL.md"), path.join(ROOT, ".claude", "skills", s, "SKILL.md"));
+  for (const a of AGENTS) copyFile(path.join(PKG, "templates", "agents", a + ".md"), path.join(ROOT, ".claude", "agents", a + ".md"));
   fs.writeFileSync(path.join(D, "VERSION"), VERSION + "\n");
 }
 
@@ -88,8 +95,8 @@ function cmdInit(args) {
     if (lines.length) fs.writeFileSync(gi, cur.replace(/\s*$/, "\n") + "# dot-design\n" + lines.join("\n") + "\n");
   }
   log(`installed v${VERSION}`);
-  log("  .design/bin/dm.js, .design/docs/, .design/mockups/");
-  log("  .claude/skills/design-iterate/SKILL.md");
+  log("  .design/bin/, .design/docs/, .design/mockups/");
+  log("  .claude/skills/{" + SKILLS.join(",") + "}  .claude/agents/{" + AGENTS.join(",") + "}");
   log(`  CLAUDE.md${wroteAgents ? " + AGENTS.md" : ""} (marked block${wroteClaude ? "" : " skipped"})`);
   if (fresh) log("next: open Claude Code or Cowork here and ask for a mockup. Or: npx dot-design status");
 }
@@ -103,8 +110,9 @@ function cmdUpdate() {
 }
 
 function cmdUninstall() {
-  for (const p of ["bin", "docs", "VERSION"]) fs.rmSync(path.join(D, p), { recursive: true, force: true });
-  fs.rmSync(path.join(ROOT, ".claude", "skills", "design-iterate"), { recursive: true, force: true });
+  for (const p of ["bin", "docs", "VERSION", "viewer", "model.json"]) fs.rmSync(path.join(D, p), { recursive: true, force: true });
+  for (const s of SKILLS) fs.rmSync(path.join(ROOT, ".claude", "skills", s), { recursive: true, force: true });
+  for (const a of AGENTS) fs.rmSync(path.join(ROOT, ".claude", "agents", a + ".md"), { force: true });
   removeBlock("CLAUDE.md"); removeBlock("AGENTS.md");
   log("removed tool files. Kept .design/mockups, .design/decisions, .design/.git (delete .design/ yourself if you want them gone)");
 }
