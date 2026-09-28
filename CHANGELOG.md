@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.3 — snapshot updatess
 - snapshots: identical files across versions stored once (`snapshots/.blobs/`) and hard-linked into each version (copy fallback); sample project 17 MB → 2 MB
 - snapshots: incremental — only new or changed versions are extracted; removed versions and unused blobs are cleaned up (a viewer rebuild with nothing new takes ~0.1 s)
 - snapshots read blobs straight from the shadow git (no `tar` dependency)
