@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 — README for designers
+- README rewritten for designers and non-technical readers: one-minute setup in three steps, "just talk to Claude" examples, a viewer guide with screenshots, and reference sections (glossary, commands, file locations, troubleshooting, notes for AI agents)
+- no code changes
+
 ## 0.4.0 — viewer served over http
 - **The viewer now needs http**: open it with `npx design-recall viewer --serve` (or any static server over the project root → `/.design-recall/viewer/`). Opening `index.html` as a file shows a message explaining this
 - `dm viewer --serve [--port <n>]`: built-in static server for `.design-recall/`, local only (127.0.0.1), never serves the shadow `.git`; combines with `--watch`
