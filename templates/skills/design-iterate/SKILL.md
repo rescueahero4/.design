@@ -129,8 +129,8 @@ working copy — commit first with `dm iterate`.
 Explorations are parallel concepts (e.g. `checkout-flow` vs `checkout-minimal`), each with its
 own v01…vN lineage. They share the same working directory, so only one is checked out at a
 time. Switching: `dm goto v<N> --exploration <name>`. When the user asks to compare two
-explorations, `dm snapshot` extracts every iteration to `.design-recall/snapshots/<expl>/vNN/` so both
-can be opened side by side.
+explorations, open the viewer (`dm viewer --serve`) and use **Compare** to show two versions side by
+side — any exploration, any iteration.
 
 ## Manual edits by the designer
 

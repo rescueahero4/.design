@@ -144,7 +144,7 @@ function cmdUpdate() {
   upsertBlock("CLAUDE.md", { createIfMissing: false });
   upsertBlock("AGENTS.md", { createIfMissing: false });
   const rebuilt = refreshViewer();
-  log(`updated to v${VERSION} (decisions, history and mockups untouched${rebuilt ? "; viewer rebuilt" : ""})`);
+  log(`updated to v${VERSION} (decisions, history and mockups untouched${rebuilt ? "; viewer rebuilt — open it with: npx design-recall viewer --serve" : ""})`);
 }
 
 function cmdUninstall() {

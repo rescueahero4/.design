@@ -23,15 +23,15 @@ Requires Node 18+ and git on PATH.
 ## Viewer
 
 ```
-npx design-recall viewer               # build .design-recall/viewer/index.html
-npx design-recall viewer --watch       # rebuild on any change to decisions, findings, principles or mockups
+npx design-recall viewer --serve       # build it and serve it on http://localhost:4178/viewer/
+npx design-recall viewer --serve --watch   # …and rebuild on any change to decisions, findings, principles or mockups
+npx design-recall viewer               # build only (.design-recall/viewer/)
 ```
 
-Open it one of two ways:
-
-- **Double-click** `.design-recall/viewer/index.html` (file://). Use ↻ or `R` to reload after a rebuild.
-- **Serve the project root over http** (e.g. VS Code Live Server) and open
-  `/.design-recall/viewer/index.html`. The page reloads itself after each rebuild.
+The viewer must be opened over **http**, not by double-clicking `index.html`: each version's files
+are served to the page by a service worker, and browsers only run those over http. Either use
+`--serve` (local only, `--port <n>` to pick a port), or serve the project root with any static server
+(e.g. VS Code Live Server) and open `/.design-recall/viewer/`. Use ↻ or `R` to reload after a rebuild.
 
 Once the viewer exists it is rebuilt automatically after every iterate, revert, fork, `ddr confirm`,
 findings change and `principles --mark`, and after `npx design-recall update`.
@@ -77,8 +77,8 @@ npx design-recall principles --check
 | `ddr edit <id> --set key=value` | Fix a recorded field |
 | `findings list [--open]` | Critique findings from the review agents |
 | `principles [--check \| --mark]` | Evidence digest / drift check / record an update |
-| `viewer [--watch]` | Build the viewer |
-| `snapshot` | Extract every version to `snapshots/` (the viewer does this for you) |
+| `viewer [--serve] [--watch]` | Build the viewer; `--serve` serves it on localhost |
+| `snapshot` | Store every version's files in `snapshots/` (the viewer does this for you) |
 | `extract` | Build `model.json` from the mockups' DOM |
 | `spec prd \| arch` | Write PRD / architecture skeletons to `specs/` |
 
@@ -97,8 +97,8 @@ npx design-recall principles --check
 | `.git/` | Shadow history of the mockups; never touches your project's git | no |
 | `snapshots/`, `viewer/`, `state.json`, `model.json` | Generated | no |
 
-`snapshots/` holds a browsable copy of every version for the viewer. Files that are identical
-across versions are stored once (`snapshots/.blobs/`) and hard-linked into each version folder, so
-it grows only with real changes. Windows Explorer's folder "Size" counts every link in full and
-overstates it; "Size on disk" of `.blobs/` is the real figure. Don't edit files in `snapshots/`: a
-change would show up in every version that shares the file.
+`snapshots/` holds every version's files for the viewer: each distinct file is stored once in
+`snapshots/blobs/` (named by its git id, no extension) and `snapshots/manifest.json` lists which
+files make up each version, so it grows only with real changes. There are no per-version folders to
+browse; use the viewer, or `dm goto vN` to put a version back into `mockups/`. It is regenerated
+from the shadow history, so it is safe to delete.

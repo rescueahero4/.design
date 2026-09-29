@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.4.0 — viewer served over http
+- **The viewer now needs http**: open it with `npx design-recall viewer --serve` (or any static server over the project root → `/.design-recall/viewer/`). Opening `index.html` as a file shows a message explaining this
+- `dm viewer --serve [--port <n>]`: built-in static server for `.design-recall/`, local only (127.0.0.1), never serves the shadow `.git`; combines with `--watch`
+- snapshots: no per-version folders or hard links any more — each distinct file is stored once in `snapshots/blobs/` and `snapshots/manifest.json` maps every version to its files; a service worker (`viewer/sw.js`) serves `viewer/snap/<expl>/vNN/<path>` from them with the right content type
+- existing 0.3.x snapshots are discarded and rebuilt automatically on the next viewer build
+- sharing: zip `viewer/` + `snapshots/` together and serve the folder over http (see the design-viewer skill)
+
 ## 0.3.3 — snapshot updatess
 - snapshots: identical files across versions stored once (`snapshots/.blobs/`) and hard-linked into each version (copy fallback); sample project 17 MB → 2 MB
 - snapshots: incremental — only new or changed versions are extracted; removed versions and unused blobs are cleaned up (a viewer rebuild with nothing new takes ~0.1 s)

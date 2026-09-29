@@ -40,7 +40,7 @@ my-project/
     config.json  state.json  snapshots/  .git/ (shadow repo)
     findings.json        ← critique findings (f-0001 …), resolved against DDRs
     specs/               ← PRD.md, SOLUTION-ARCHITECTURE.md (derived, regenerable)
-    viewer/index.html    ← run `dm viewer` once; kept current after every iteration
+    viewer/              ← `dm viewer --serve`; kept current after every iteration
     model.json           ← run `dm extract` (regenerated)
   .claude/skills/design-{iterate,critique,spec,viewer,principles}/SKILL.md
   .claude/agents/{edge-case-hunter,unhappy-path-walker,feasibility-reviewer}.md
@@ -55,7 +55,7 @@ npx design-recall iterate --change "Moved CTA above summary" --rationale "…"
 npx design-recall log
 npx design-recall back | forward | goto v3 | revert v3 | fork v2 --as variant-b
 npx design-recall ddr list --pending
-npx design-recall viewer [--watch]              # build once; auto-rebuilt after each iteration (--watch: also on manual edits)
+npx design-recall viewer --serve [--watch]      # open on http://localhost:4178/viewer/; auto-rebuilt after each iteration (--watch: also on manual edits)
 npx design-recall extract                       # DOM + mock-data → model.json + mechanical checks
 npx design-recall findings list --open
 npx design-recall spec prd | arch               # skeletons; Claude fills the narrative
