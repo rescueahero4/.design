@@ -5,15 +5,15 @@
 **Never lose a design decision again — every version of your mockups, and the reason behind it.**
 
 [![npm](https://img.shields.io/npm/v/design-recall?style=for-the-badge&color=cb3837&logo=npm)](https://www.npmjs.com/package/design-recall)
-[![Star this repo](https://img.shields.io/github/stars/rescueahero4/design-recall?style=for-the-badge&logo=github&label=Star&color=f5c518)](https://github.com/rescueahero4/design-recall)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](https://github.com/rescueahero4/design-recall/blob/main/LICENSE)
+[![Star this repo](https://img.shields.io/github/stars/rescueahero4/.design-recall?style=for-the-badge&logo=github&label=Star&color=f5c518)](https://github.com/rescueahero4/.design-recall)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](https://github.com/rescueahero4/.design-recall/blob/main/LICENSE)
 [![Claude Code + Cowork](https://img.shields.io/badge/Claude_Code-%7C%20Cowork-black?style=for-the-badge)](#setup)
 
 </div>
 
 | | |
 |:--:|:--:|
-| <img src="https://raw.githubusercontent.com/rescueahero4/design-recall/main/docs/images/viewer-history.png" alt="The viewer: version history, the mockup, and the decision behind it"> | <img src="https://raw.githubusercontent.com/rescueahero4/design-recall/main/docs/images/viewer-principles.png" alt="The viewer with your design principles"> |
+| <img src="https://raw.githubusercontent.com/rescueahero4/.design-recall/main/docs/images/viewer-history.png" alt="The viewer: version history, the mockup, and the decision behind it"> | <img src="https://raw.githubusercontent.com/rescueahero4/.design-recall/main/docs/images/viewer-principles.png" alt="The viewer with your design principles"> |
 | Every version, and why it changed | Your design principles, learned from your decisions |
 
 ## What you can do
@@ -230,7 +230,7 @@ Facts for agents working in a project that uses design-recall:
 <details>
 <summary><b>What's new</b></summary>
 
-See the [CHANGELOG](https://github.com/rescueahero4/design-recall/blob/main/CHANGELOG.md).
+See the [CHANGELOG](https://github.com/rescueahero4/.design-recall/blob/main/CHANGELOG.md).
 
 </details>
 
@@ -238,8 +238,8 @@ See the [CHANGELOG](https://github.com/rescueahero4/design-recall/blob/main/CHAN
 
 <div align="center">
 
-**Found this useful? [⭐ Star it](https://github.com/rescueahero4/design-recall) or share it with a designer who's ever asked "wait, why did we change that?"**
+**Found this useful? [⭐ Star it](https://github.com/rescueahero4/.design-recall) or share it with a designer who's ever asked "wait, why did we change that?"**
 
-MIT licensed — see [LICENSE](https://github.com/rescueahero4/design-recall/blob/main/LICENSE).
+MIT licensed — see [LICENSE](https://github.com/rescueahero4/.design-recall/blob/main/LICENSE).
 
 </div>

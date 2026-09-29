@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.2 — fix repository links
+- README images, badges and links, and the package's repository / homepage / issues links, now point to the actual GitHub repo (`rescueahero4/.design-recall`)
+
 ## 0.4.1 — README for designers
 - README rewritten for designers and non-technical readers: one-minute setup in three steps, "just talk to Claude" examples, a viewer guide with screenshots, and reference sections (glossary, commands, file locations, troubleshooting, notes for AI agents)
 - no code changes

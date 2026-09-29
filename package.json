@@ -4,11 +4,11 @@
   "description": "Design-driven process tooling for Claude Code / Cowork: versioned HTML mockups + Design Decision Records in a self-contained .design-recall/ folder.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rescueahero4/design-recall.git"
+    "url": "git+https://github.com/rescueahero4/.design-recall.git"
   },
-  "homepage": "https://github.com/rescueahero4/design-recall#readme",
+  "homepage": "https://github.com/rescueahero4/.design-recall#readme",
   "bugs": {
-    "url": "https://github.com/rescueahero4/design-recall/issues"
+    "url": "https://github.com/rescueahero4/.design-recall/issues"
   },
   "bin": {
     "design-recall": "cli/index.js",
