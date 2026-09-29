@@ -1,6 +1,6 @@
 {
   "name": "design-recall",
-  "version": "0.3.3",
+  "version": "0.4.0",
   "description": "Design-driven process tooling for Claude Code / Cowork: versioned HTML mockups + Design Decision Records in a self-contained .design-recall/ folder.",
   "repository": {
     "type": "git",
