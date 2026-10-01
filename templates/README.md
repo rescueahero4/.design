@@ -37,11 +37,11 @@ Once the viewer exists it is rebuilt automatically after every iterate, revert, 
 findings change and `principles --mark`, and after `npx design-recall update`.
 
 Viewer keys: `[` / `]` show or hide the side panels (or drag their edges; double-click an edge to
-reset), `R` reloads, ↑ ↓ move through iterations, → ← expand or collapse one, Enter selects.
+reset), `R` reloads, ← → switch the left panel's Versions / Principles tabs, ↑ ↓ move through iterations, → ← expand or collapse one, Enter selects.
 
 ## Getting principles into the viewer
 
-The viewer's **Principles** panel reads `.design-recall/context/design-principles.md`. That file is
+The viewer's **Principles** tab reads `.design-recall/context/design-principles.md`. That file is
 written by Claude, not by a command. The script gathers the evidence and Claude turns it into principles:
 
 1. Confirm decisions so they count as evidence (only **confirmed** DDRs are used, at least 5):
@@ -53,7 +53,7 @@ written by Claude, not by a command. The script gathers the evidence and Claude 
    `dm principles` for the evidence digest, writes `context/design-principles.md` in the format in
    `docs/principles-schema.md`, then runs `dm principles --mark`.
 3. `--mark` rebuilds the viewer, so the principles show up right away. Click a principle to
-   highlight the decisions that back it.
+   list the versions that back it (and its exceptions) below it, and to highlight them in the Versions tab.
 
 Check for drift (a rejected option coming back, decisions that contradict a principle):
 

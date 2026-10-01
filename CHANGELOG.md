@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3 — viewer: versions and principles tabs
+- viewer: the left panel is split into **Versions** and **Principles** tabs (← → to switch; the open tab is remembered per browser tab)
+- viewer: selecting a principle lists the versions it cites below it — evidence first, then exceptions — across all explorations; click one to open it
+
 ## 0.4.2 — fix repository links
 - README images, badges and links, and the package's repository / homepage / issues links, now point to the actual GitHub repo (`rescueahero4/.design-recall`)
 

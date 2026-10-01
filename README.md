@@ -131,7 +131,7 @@ npx design-recall viewer --serve
 
 Then open **http://localhost:4178/viewer/** in your browser. Keep the terminal open while you use it; press `Ctrl+C` to stop.
 
-- **Left** — your **principles** and every **version**, newest on top. Click one to see it.
+- **Left** — two tabs. **Versions**: every version, newest on top; click one to see it. **Principles**: click a principle to list the versions that follow it.
 - **Middle** — the mockup itself, fully clickable. Tabs switch between pages.
 - **Right** — the **decision**: what changed, why, what was rejected, and your original words.
 - **Compare** (top bar) — pick a second version to see both side by side.
